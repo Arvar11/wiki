@@ -5,6 +5,7 @@ import com.panda.wiki.domain.EbookExample;
 import com.panda.wiki.mapper.EbookMapper;
 import com.panda.wiki.req.EbookReq;
 import com.panda.wiki.resp.EbookResp;
+import com.panda.wiki.util.CopyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -41,13 +42,14 @@ public class EbookService {
 // ebookMapper.selectByExample() 会根据上面设置的条件生成SQL并执行
         List<Ebook> ebooklist = ebookMapper.selectByExample(ebookExample);
 
-        List<EbookResp> respList =new ArrayList<>();
-        for(Ebook ebook:ebooklist)
-        {
-            EbookResp ebookResp = new EbookResp();
-            BeanUtils.copyProperties(ebook,ebookResp);
-            respList.add(ebookResp);
-        }
+//        List<EbookResp> respList =new ArrayList<>();
+//        for(Ebook ebook:ebooklist)
+//        {
+//            EbookResp ebookResp = new EbookResp();
+//            BeanUtils.copyProperties(ebook,ebookResp);
+//            respList.add(ebookResp);
+//        }
+        List<EbookResp> respList= CopyUtil.copyList(ebooklist,EbookResp.class);
         return  respList;
     }
 }
