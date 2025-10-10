@@ -46,7 +46,8 @@
                 type="XMLMAPPER"/>
 
         <!-- 表配置 -->
-        <table tableName="demo" domainObjectName="Demo"/>
+<!--        <table tableName="demo" domainObjectName="Demo"/>-->
+        <table tableName="ebook" domainObjectName="Ebook"/>
 
     </context>
 </generatorConfiguration>
