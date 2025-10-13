@@ -3,6 +3,7 @@ package com.panda.wiki.controller;
 import com.panda.wiki.req.EbookReq;
 import com.panda.wiki.resp.CommonResp;
 import com.panda.wiki.resp.EbookResp;
+import com.panda.wiki.resp.PageResp;
 import com.panda.wiki.service.EbookService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +21,8 @@ public class EbookController {
 
     @GetMapping("/list")
     public CommonResp list(EbookReq req) {
-        List<EbookResp> list = ebookService.list(req);
-        CommonResp<List<EbookResp>> resp = new CommonResp<>();
+        PageResp<EbookResp> list = ebookService.list(req);
+        CommonResp<PageResp<EbookResp>> resp = new CommonResp<>();
         resp.setContent(list);
         return resp;
     }

@@ -1,25 +1,34 @@
 package com.panda.wiki.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.panda.wiki.domain.Ebook;
 import com.panda.wiki.domain.EbookExample;
 import com.panda.wiki.mapper.EbookMapper;
 import com.panda.wiki.req.EbookReq;
 import com.panda.wiki.resp.EbookResp;
+import com.panda.wiki.resp.PageResp;
 import com.panda.wiki.util.CopyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
+import lombok.extern.slf4j.Slf4j;  // 确保这个导入存在
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
+import static org.springframework.boot.Banner.Mode.LOG;
+
+@Slf4j
 @Service
 public class EbookService {
 
     @Resource
     private EbookMapper ebookMapper;
 
-    public List<EbookResp> list(EbookReq req) {
+    public PageResp<EbookResp> list(EbookReq req) {
 // 创建一个电子书查询条件对象（用于构建SQL查询条件）
         EbookExample ebookExample = new EbookExample();
 
@@ -38,9 +47,15 @@ public class EbookService {
             criteria.andNameLike("%" + req.getName() + "%");
         }
 
+        PageHelper.startPage(req.getPage(), req.getSize()); // 查询第1页，每页3条数据
 // 执行查询并返回结果列表
 // ebookMapper.selectByExample() 会根据上面设置的条件生成SQL并执行
         List<Ebook> ebooklist = ebookMapper.selectByExample(ebookExample);
+
+        PageInfo<Ebook> pageInfo = new PageInfo<>(ebooklist);
+        log.info("总行数：{}", pageInfo.getTotal());
+        log.info("总页数：{}", pageInfo.getPages());
+
 
 //        List<EbookResp> respList =new ArrayList<>();
 //        for(Ebook ebook:ebooklist)
@@ -50,6 +65,9 @@ public class EbookService {
 //            respList.add(ebookResp);
 //        }
         List<EbookResp> respList= CopyUtil.copyList(ebooklist,EbookResp.class);
-        return  respList;
+        PageResp<EbookResp> pageResp=new PageResp<>();
+        pageResp.setTotal(pageInfo.getTotal());
+        pageResp.setList(respList);
+        return  pageResp;
     }
 }
