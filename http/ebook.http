@@ -3,3 +3,32 @@ Accept: application/json
 
 ###
 GET http://localhost:8080/ebook/list?name=Spring
+
+###
+GET http://localhost:8080/ebook/list
+
+### 更新
+POST http://localhost:8080/ebook/save
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Spring Boot 实战教程（修订版）",
+  "category1Id": 1,
+  "category2Id": 2,
+  "description": "修订版，更新了Spring Boot 2.0内容",
+  "cover": "spring-boot-2.jpg",
+  "docCount": 18,
+  "viewCount": 100,
+  "voteCount": 10
+}
+
+### 新增
+POST http://localhost:8080/ebook/save
+Content-Type: application/json
+
+{
+  "name": "陆哥学",
+  "description": "跟着陆哥学C++",
+  "voteCount": 100000000
+}

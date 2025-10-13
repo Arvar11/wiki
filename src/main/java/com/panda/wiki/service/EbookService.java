@@ -5,21 +5,19 @@ import com.github.pagehelper.PageInfo;
 import com.panda.wiki.domain.Ebook;
 import com.panda.wiki.domain.EbookExample;
 import com.panda.wiki.mapper.EbookMapper;
-import com.panda.wiki.req.EbookReq;
+import com.panda.wiki.req.EbookQueryReq;
+import com.panda.wiki.req.EbookSaveReq;
 import com.panda.wiki.resp.EbookResp;
 import com.panda.wiki.resp.PageResp;
 import com.panda.wiki.util.CopyUtil;
-import org.springframework.beans.BeanUtils;
+import com.panda.wiki.util.SnowFlake;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;  // 确保这个导入存在
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
-
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
-import static org.springframework.boot.Banner.Mode.LOG;
 
 @Slf4j
 @Service
@@ -28,7 +26,10 @@ public class EbookService {
     @Resource
     private EbookMapper ebookMapper;
 
-    public PageResp<EbookResp> list(EbookReq req) {
+    @Autowired
+    private SnowFlake snowFlake;  // 注入雪花算法
+
+    public PageResp<EbookResp> list(EbookQueryReq req) {
 // 创建一个电子书查询条件对象（用于构建SQL查询条件）
         EbookExample ebookExample = new EbookExample();
 
@@ -69,5 +70,17 @@ public class EbookService {
         pageResp.setTotal(pageInfo.getTotal());
         pageResp.setList(respList);
         return  pageResp;
+    }
+
+    public void save(EbookSaveReq req) {
+        Ebook ebook=CopyUtil.copy(req, Ebook.class);
+        if (req.getId() == null) {
+            // 新增
+            ebook.setId(snowFlake.nextId());
+            ebookMapper.insert(ebook);
+        } else {
+            // 更新
+            ebookMapper.updateByPrimaryKey(ebook);
+        }
     }
 }
