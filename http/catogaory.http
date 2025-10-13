@@ -1,0 +1,21 @@
+GET http://localhost:8080/category/list?page=2&size=3
+Accept: application/json
+
+###
+GET http://localhost:8080/category/list?name=应用
+
+###
+GET http://localhost:8080/category/list
+
+### 更新
+POST http://localhost:8080/category/save
+Content-Type: application/json
+
+{
+  "parent": 0,
+  "name": "panda",
+  "sort": 100
+}
+
+###
+DELETE http://localhost:8080/category/delete/236125464102572032

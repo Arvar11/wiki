@@ -2,39 +2,38 @@ package com.panda.wiki.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.panda.wiki.domain.Ebook;
-import com.panda.wiki.domain.EbookExample;
-import com.panda.wiki.mapper.EbookMapper;
-import com.panda.wiki.req.EbookQueryReq;
-import com.panda.wiki.req.EbookSaveReq;
-import com.panda.wiki.resp.EbookResp;
+import com.panda.wiki.domain.Category;
+import com.panda.wiki.domain.CategoryExample;
+import com.panda.wiki.mapper.CategoryMapper;
+import com.panda.wiki.req.CategoryQueryReq;
+import com.panda.wiki.req.CategorySaveReq;
+import com.panda.wiki.resp.CategoryResp;
 import com.panda.wiki.resp.PageResp;
 import com.panda.wiki.util.CopyUtil;
 import com.panda.wiki.util.SnowFlake;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import lombok.extern.slf4j.Slf4j;  // 确保这个导入存在
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Slf4j
 @Service
-public class EbookService {
+public class CategoryService {
 
     @Resource
-    private EbookMapper ebookMapper;
+    private CategoryMapper categoryMapper;
 
     @Autowired
     private SnowFlake snowFlake;  // 注入雪花算法
 
-    public PageResp<EbookResp> list(EbookQueryReq req) {
+    public PageResp<CategoryResp> list(CategoryQueryReq req) {
 // 创建一个电子书查询条件对象（用于构建SQL查询条件）
-        EbookExample ebookExample = new EbookExample();
+        CategoryExample categoryExample = new CategoryExample();
 
 // 创建查询条件构造器（Criteria是MyBatis生成的查询条件构建器）
-        EbookExample.Criteria criteria = ebookExample.createCriteria();
+        CategoryExample.Criteria criteria = categoryExample.createCriteria();
 
 // 要根据名称模糊查询
 // !req.getName().trim().isEmpty() 的含义："去除首尾空白后的姓名不为空"
@@ -50,41 +49,41 @@ public class EbookService {
 
         PageHelper.startPage(req.getPage(), req.getSize()); // 查询第1页，每页3条数据
 // 执行查询并返回结果列表
-// ebookMapper.selectByExample() 会根据上面设置的条件生成SQL并执行
-        List<Ebook> ebooklist = ebookMapper.selectByExample(ebookExample);
+// categoryMapper.selectByExample() 会根据上面设置的条件生成SQL并执行
+        List<Category> categorylist = categoryMapper.selectByExample(categoryExample);
 
-        PageInfo<Ebook> pageInfo = new PageInfo<>(ebooklist);
+        PageInfo<Category> pageInfo = new PageInfo<>(categorylist);
         log.info("总行数：{}", pageInfo.getTotal());
         log.info("总页数：{}", pageInfo.getPages());
 
 
-//        List<EbookResp> respList =new ArrayList<>();
-//        for(Ebook ebook:ebooklist)
+//        List<CategoryResp> respList =new ArrayList<>();
+//        for(Category category:categorylist)
 //        {
-//            EbookResp ebookResp = new EbookResp();
-//            BeanUtils.copyProperties(ebook,ebookResp);
-//            respList.add(ebookResp);
+//            CategoryResp categoryResp = new CategoryResp();
+//            BeanUtils.copyProperties(category,categoryResp);
+//            respList.add(categoryResp);
 //        }
-        List<EbookResp> respList= CopyUtil.copyList(ebooklist,EbookResp.class);
-        PageResp<EbookResp> pageResp=new PageResp<>();
+        List<CategoryResp> respList= CopyUtil.copyList(categorylist,CategoryResp.class);
+        PageResp<CategoryResp> pageResp=new PageResp<>();
         pageResp.setTotal(pageInfo.getTotal());
         pageResp.setList(respList);
         return  pageResp;
     }
 
-    public void save(EbookSaveReq req) {
-        Ebook ebook=CopyUtil.copy(req, Ebook.class);
+    public void save(CategorySaveReq req) {
+        Category category=CopyUtil.copy(req, Category.class);
         if (req.getId() == null) {
             // 新增
-            ebook.setId(snowFlake.nextId());
-            ebookMapper.insert(ebook);
+            category.setId(snowFlake.nextId());
+            categoryMapper.insert(category);
         } else {
             // 更新
-            ebookMapper.updateByPrimaryKey(ebook);
+            categoryMapper.updateByPrimaryKey(category);
         }
     }
 
     public void delete(Long id) {
-        ebookMapper.deleteByPrimaryKey(id);
+        categoryMapper.deleteByPrimaryKey(id);
     }
 }

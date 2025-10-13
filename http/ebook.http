@@ -28,7 +28,11 @@ POST http://localhost:8080/ebook/save
 Content-Type: application/json
 
 {
-  "name": "陆哥学",
-  "description": "跟着陆哥学C++",
+  "name": "陆学",
+  "description": "跟着哥学C++",
   "voteCount": 100000000
 }
+
+###
+###
+DELETE http://localhost:8080/ebook/delete/236124960274386944
