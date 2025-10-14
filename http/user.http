@@ -23,6 +23,15 @@ Content-Type: application/json
   "name": "panda2",
   "password": "test11111"
 }
+### 新增
+POST http://localhost:8080/user/save
+Content-Type: application/json
+
+{
+  "loginName": "test3",
+  "name": "panda3",
+  "password": "test11111"
+}
 
 ###
 DELETE http://localhost:8080/user/delete/236462178624999424
