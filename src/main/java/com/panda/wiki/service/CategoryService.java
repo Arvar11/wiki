@@ -32,6 +32,7 @@ public class CategoryService {
 // 创建一个电子书查询条件对象（用于构建SQL查询条件）
         CategoryExample categoryExample = new CategoryExample();
 
+        categoryExample.setOrderByClause("sort asc");
 // 创建查询条件构造器（Criteria是MyBatis生成的查询条件构建器）
         CategoryExample.Criteria criteria = categoryExample.createCriteria();
 
@@ -69,6 +70,17 @@ public class CategoryService {
         pageResp.setTotal(pageInfo.getTotal());
         pageResp.setList(respList);
         return  pageResp;
+    }
+
+    public List<CategoryResp> all() {
+         // 创建一个电子书查询条件对象（用于构建SQL查询条件）
+        CategoryExample categoryExample = new CategoryExample();
+        categoryExample.setOrderByClause("sort asc");
+        List<Category> categorylist = categoryMapper.selectByExample(categoryExample);
+
+
+        List<CategoryResp> list= CopyUtil.copyList(categorylist,CategoryResp.class);
+        return  list;
     }
 
     public void save(CategorySaveReq req) {

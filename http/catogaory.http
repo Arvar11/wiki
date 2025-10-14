@@ -5,6 +5,9 @@ Accept: application/json
 GET http://localhost:8080/category/list?name=应用
 
 ###
+GET http://localhost:8080/category/all
+
+###
 GET http://localhost:8080/category/list
 
 ### 更新

@@ -9,6 +9,7 @@ import com.panda.wiki.service.CategoryService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping ("/category")
@@ -37,6 +38,15 @@ public class CategoryController {
     {
         CommonResp resp = new CommonResp<>();
         categoryService.delete(id);
+        return resp;
+    }
+
+    @GetMapping ("/all")
+    public CommonResp all( )
+    {
+        CommonResp<List<CategoryResp>> resp = new CommonResp<>();
+        List<CategoryResp> list = categoryService.all( );
+        resp.setContent(list);
         return resp;
     }
 }
