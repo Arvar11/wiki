@@ -1,4 +1,4 @@
-GET http://localhost:8080/ebook/list?page=1&size=10
+GET http://localhost:8080/ebook/list?page=1&size=10000
 Accept: application/json
 
 ###
@@ -13,7 +13,7 @@ Content-Type: application/json
 
 {
   "id": 1,
-  "name": "Spring Boot 实战教程（修订版）",
+
   "category1Id": 1,
   "category2Id": 2,
   "description": "修订版，更新了Spring Boot 2.0内容",
