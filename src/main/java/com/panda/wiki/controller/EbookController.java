@@ -6,11 +6,13 @@ import com.panda.wiki.resp.CommonResp;
 import com.panda.wiki.resp.EbookResp;
 import com.panda.wiki.resp.PageResp;
 import com.panda.wiki.service.EbookService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
+@Slf4j
 @RestController
 @RequestMapping ("/ebook")
 public class EbookController {
@@ -19,7 +21,8 @@ public class EbookController {
     private EbookService ebookService;
 
     @GetMapping("/list")
-    public CommonResp list( @Valid EbookQueryReq req) {
+    public CommonResp list( @Valid  EbookQueryReq req) {
+        log.info(req.toString());
         PageResp<EbookResp> list = ebookService.list(req);
         CommonResp<PageResp<EbookResp>> resp = new CommonResp<>();
         resp.setContent(list);

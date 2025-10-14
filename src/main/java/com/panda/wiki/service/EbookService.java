@@ -30,6 +30,7 @@ public class EbookService {
     private SnowFlake snowFlake;  // 注入雪花算法
 
     public PageResp<EbookResp> list(EbookQueryReq req) {
+        log.info(req.toString());
 // 创建一个电子书查询条件对象（用于构建SQL查询条件）
         EbookExample ebookExample = new EbookExample();
 
@@ -47,6 +48,11 @@ public class EbookService {
             // 例如：如果用户搜索"Java"，SQL条件就是 name LIKE '%Java%'
             criteria.andNameLike("%" + req.getName() + "%");
         }
+
+        if (req.getCategory2_id() != null ) {
+            criteria.andCategory2IdEqualTo(req.getCategory2_id());
+        }
+
 
         PageHelper.startPage(req.getPage(), req.getSize()); // 查询第1页，每页3条数据
 // 执行查询并返回结果列表

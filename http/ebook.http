@@ -34,5 +34,8 @@ Content-Type: application/json
 }
 
 ###
+GET http://localhost:8080/ebook/list?category2_id=401
+
+###
 ###
 DELETE http://localhost:8080/ebook/delete/236124960274386944

@@ -2,6 +2,8 @@ GET http://localhost:8080/category/list?page=2&size=3
 Accept: application/json
 
 ###
+GET http://localhost:8080/category/list?categoryId=200
+###
 GET http://localhost:8080/category/list?name=应用
 
 ###

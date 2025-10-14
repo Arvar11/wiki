@@ -5,6 +5,25 @@ public class EbookQueryReq extends PageReq{
 
     private String name;
 
+    public Long getCategory2_id() {
+        return category2_id;
+    }
+
+    public void setCategory2_id(Long category2_id) {
+        this.category2_id = category2_id;
+    }
+
+    @Override
+    public String toString() {
+        return "EbookQueryReq{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category2=" + category2_id +
+                '}';
+    }
+
+    private Long category2_id;
+
 
     public Long getId() {
         return id;
@@ -23,16 +42,4 @@ public class EbookQueryReq extends PageReq{
     }
 
 
-    //toString主要是来打日志的
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
-        sb.append("]");
-        return sb.toString();
-    }
 }
