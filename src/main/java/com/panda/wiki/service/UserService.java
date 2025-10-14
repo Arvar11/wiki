@@ -4,6 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.panda.wiki.domain.User;
 import com.panda.wiki.domain.UserExample;
+import com.panda.wiki.exception.BusinessException;
+import com.panda.wiki.exception.BusinessExceptionCode;
 import com.panda.wiki.mapper.UserMapper;
 import com.panda.wiki.req.UserQueryReq;
 import com.panda.wiki.req.UserSaveReq;
@@ -14,6 +16,7 @@ import com.panda.wiki.util.SnowFlake;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -77,16 +80,45 @@ public class UserService {
     public void save(UserSaveReq req) {
         User user=CopyUtil.copy(req, User.class);
         if (req.getId() == null) {
-            // 新增
-            user.setId(snowFlake.nextId());
-            userMapper.insert(user);
+            User userDB=selectByLoginName(user.getLoginName());
+            if(ObjectUtils.isEmpty(userDB)){
+                user.setId(snowFlake.nextId());
+                userMapper.insert(user);
+            }else {
+                //登录名已存在
+                throw new BusinessException(BusinessExceptionCode.USER_LOGIN_NAME_EXIST);
+            }
         } else {
+            //因为我们要求不可修改登录名
             // 更新
-            userMapper.updateByPrimaryKey(user);
+            //将用户的登录名更新为null，同时也会更新user对象中其他非null的字段
+            user.setLoginName( null);
+            userMapper.updateByPrimaryKeySelective(user);
+            //updateByPrimaryKeySelective方法会根据主键更新对象，但只更新非null的字段
         }
     }
 
     public void delete(Long id) {
         userMapper.deleteByPrimaryKey(id);
+    }
+
+    public User selectByLoginName(String loginName){
+        UserExample userExample = new UserExample();
+
+        // 创建查询条件构造器（Criteria是MyBatis生成的查询条件构建器）
+        UserExample.Criteria criteria = userExample.createCriteria();
+
+
+            // 例如：如果用户搜索"Java"，SQL条件就是 name LIKE '%Java%'
+            criteria.andLoginNameEqualTo(loginName);
+
+        List<User> userList =  userMapper.selectByExample(userExample);
+        if(userList.isEmpty())
+        {
+            return null;
+        }else{
+            return userList.get(0);
+        }
+
     }
 }
