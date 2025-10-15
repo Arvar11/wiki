@@ -7,9 +7,11 @@ import com.panda.wiki.domain.UserExample;
 import com.panda.wiki.exception.BusinessException;
 import com.panda.wiki.exception.BusinessExceptionCode;
 import com.panda.wiki.mapper.UserMapper;
+import com.panda.wiki.req.UserLoginReq;
 import com.panda.wiki.req.UserQueryReq;
 import com.panda.wiki.req.UserResetPasswordReq;
 import com.panda.wiki.req.UserSaveReq;
+import com.panda.wiki.resp.UserLoginResp;
 import com.panda.wiki.resp.UserResp;
 import com.panda.wiki.resp.PageResp;
 import com.panda.wiki.util.CopyUtil;
@@ -128,5 +130,22 @@ public class UserService {
     public void resetPassword( UserResetPasswordReq req) {
         User user=CopyUtil.copy(req,User.class);
         userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    public UserLoginResp login(@Valid UserLoginReq userLoginReq) {
+        User userDB=selectByLoginName(userLoginReq.getLoginName());
+        if(ObjectUtils.isEmpty(userDB)){
+            //用户不存在
+            throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);
+        }else{
+            if(userDB.getPassword().equals(userLoginReq.getPassword())){
+                //登录成功
+                UserLoginResp userLoginResp= CopyUtil.copy(userDB,UserLoginResp.class);
+                return userLoginResp;
+            }else{
+                //密码错误
+                throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);
+            }
+        }
     }
 }

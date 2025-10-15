@@ -1,14 +1,17 @@
 package com.panda.wiki.controller;
 
+import com.panda.wiki.req.UserLoginReq;
 import com.panda.wiki.req.UserQueryReq;
 import com.panda.wiki.req.UserResetPasswordReq;
 import com.panda.wiki.req.UserSaveReq;
 import com.panda.wiki.resp.CommonResp;
+import com.panda.wiki.resp.UserLoginResp;
 import com.panda.wiki.resp.UserResp;
 import com.panda.wiki.resp.PageResp;
 import com.panda.wiki.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.DigestUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -52,6 +55,15 @@ public class UserController {
         req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
         CommonResp resp = new CommonResp<>();
         userService.resetPassword(req);
+        return resp;
+    }
+
+    @PostMapping("/login")
+    public CommonResp<UserLoginResp> login(@RequestBody@Valid UserLoginReq userLoginReq){
+        userLoginReq.setPassword(DigestUtils.md5DigestAsHex(userLoginReq.getPassword().getBytes()));
+        UserLoginResp userLoginResp=userService.login(userLoginReq);
+        CommonResp resp = new CommonResp<>();
+        resp.setContent(userLoginResp);
         return resp;
     }
 }
