@@ -93,6 +93,7 @@ public class UserService {
             // 更新
             //将用户的登录名更新为null，同时也会更新user对象中其他非null的字段
             user.setLoginName( null);
+            user.setPassword( null);
             userMapper.updateByPrimaryKeySelective(user);
             //updateByPrimaryKeySelective方法会根据主键更新对象，但只更新非null的字段
         }

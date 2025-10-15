@@ -11,7 +11,7 @@ Content-Type: application/json
   "id": 236462108731117568,
   "loginName": "test2(更新）",
   "name": "panda",
-  "password": "test11111"
+  "password": "test21111"
 }
 
 ### 新增
@@ -21,7 +21,7 @@ Content-Type: application/json
 {
   "loginName": "test2(更新）",
   "name": "panda2",
-  "password": "test11111"
+  "password": "test21111"
 }
 ### 新增
 POST http://localhost:8080/user/save
