@@ -1,6 +1,7 @@
 package com.panda.wiki.controller;
 
 import com.panda.wiki.req.UserQueryReq;
+import com.panda.wiki.req.UserResetPasswordReq;
 import com.panda.wiki.req.UserSaveReq;
 import com.panda.wiki.resp.CommonResp;
 import com.panda.wiki.resp.UserResp;
@@ -43,6 +44,14 @@ public class UserController {
     {
         CommonResp resp = new CommonResp<>();
         userService.delete(id);
+        return resp;
+    }
+
+    @PostMapping("/reset-password")
+    public CommonResp resetPassword(@Valid @RequestBody UserResetPasswordReq req) {
+        req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
+        CommonResp resp = new CommonResp<>();
+        userService.resetPassword(req);
         return resp;
     }
 }

@@ -35,3 +35,12 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8080/user/delete/236462178624999424
+
+### 修改密码
+POST http://localhost:8080/user/reset-password
+Content-Type: application/json
+
+{
+  "id": 236462108731117568,
+  "password": "test31111"
+}

@@ -8,6 +8,7 @@ import com.panda.wiki.exception.BusinessException;
 import com.panda.wiki.exception.BusinessExceptionCode;
 import com.panda.wiki.mapper.UserMapper;
 import com.panda.wiki.req.UserQueryReq;
+import com.panda.wiki.req.UserResetPasswordReq;
 import com.panda.wiki.req.UserSaveReq;
 import com.panda.wiki.resp.UserResp;
 import com.panda.wiki.resp.PageResp;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
@@ -121,5 +123,10 @@ public class UserService {
             return userList.get(0);
         }
 
+    }
+
+    public void resetPassword( UserResetPasswordReq req) {
+        User user=CopyUtil.copy(req,User.class);
+        userMapper.updateByPrimaryKeySelective(user);
     }
 }
