@@ -1,0 +1,38 @@
+GET http://localhost:8080/doc/list?page=2&size=3
+Accept: application/json
+token:237160053545766912
+
+###
+GET http://localhost:8080/doc/list?name=文档1
+token:237160053545766912
+###
+GET http://localhost:8080/doc/list
+token:237160053545766912
+###
+GET http://localhost:8080/doc/all
+
+### 更新
+POST http://localhost:8080/doc/save
+Content-Type: application/json
+token:237160053545766912
+
+{
+  "id": 6,
+  "ebookId": 1,
+  "voteCount": 100000000
+}
+
+
+###保存
+POST http://localhost:8080/doc/save
+Content-Type: application/json
+token:237160053545766912
+
+{
+"ebookId": 1,
+"parent": 0,
+"name": "文档7"
+}
+###
+DELETE http://localhost:8080/doc/delete/7
+token:237160053545766912
