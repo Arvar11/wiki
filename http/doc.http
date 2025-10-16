@@ -36,3 +36,13 @@ token:237160053545766912
 ###
 DELETE http://localhost:8080/doc/delete/7
 token:237160053545766912
+
+###批量删除
+DELETE http://localhost:8080/doc/delete/1,2,3
+Content-Type: application/json
+token:237208252276936704
+
+###删除单个
+DELETE http://localhost:8080/doc/delete/237165055723048960
+Content-Type: application/json
+token:237208252276936704

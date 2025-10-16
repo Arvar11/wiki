@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 
 import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
@@ -38,11 +39,12 @@ public class DocController {
         return resp;
     }
 
-    @DeleteMapping("/delete/{id}")
-    public CommonResp delete(@PathVariable Long id)
+    @DeleteMapping("/delete/{idsStr}")
+    public CommonResp delete(@PathVariable String idsStr)
     {
-        CommonResp resp = new CommonResp<>();
-        docService.delete(id);
+        CommonResp resp = new CommonResp();
+        List<String> list = Arrays.asList(idsStr.split(","));
+        docService.delete(list);
         return resp;
     }
 
@@ -54,4 +56,6 @@ public class DocController {
         resp.setContent(list);
         return resp;
     }
+
+
 }
