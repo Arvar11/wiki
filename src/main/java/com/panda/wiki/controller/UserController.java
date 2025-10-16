@@ -73,10 +73,24 @@ public class UserController {
         userLoginReq.setPassword(DigestUtils.md5DigestAsHex(userLoginReq.getPassword().getBytes()));
         UserLoginResp userLoginResp=userService.login(userLoginReq);
         Long token=snowFlake.nextId();
+        log.info("生成的 Token: {}", token.toString());
         userLoginResp.setToken(token.toString());
-        redisTemplate.opsForValue().set(token, userLoginResp, 3600, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(token.toString(), userLoginResp, 3600, TimeUnit.SECONDS);
         CommonResp resp = new CommonResp<>();
         resp.setContent(userLoginResp);
         return resp;
+    }
+
+    @GetMapping("/loginout/{token}")
+    public CommonResp logout(@PathVariable String token){
+        CommonResp resp = new CommonResp<>();
+        // 检查key是否存在
+        Boolean hasKey = redisTemplate.hasKey(token);
+        log.info("删除前检查token是否存在: {}, 存在: {}", token, hasKey);
+        //要登出实际上只需要把token从redis中删除即可
+        redisTemplate.delete(token);
+        log.info("登出成功,删除了token {}", token);
+        return resp;
+
     }
 }
