@@ -2,8 +2,10 @@ package com.panda.wiki.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.panda.wiki.domain.Content;
 import com.panda.wiki.domain.Doc;
 import com.panda.wiki.domain.DocExample;
+import com.panda.wiki.mapper.ContentMapper;
 import com.panda.wiki.mapper.DocMapper;
 import com.panda.wiki.req.DocQueryReq;
 import com.panda.wiki.req.DocSaveReq;
@@ -27,6 +29,9 @@ public class DocService {
 
     @Autowired
     private SnowFlake snowFlake;  // 注入雪花算法
+
+    @Autowired
+    private ContentMapper contentMapper;
 
     public PageResp<DocResp> list(DocQueryReq req) {
 // 创建一个电子书查询条件对象（用于构建SQL查询条件）
@@ -85,13 +90,17 @@ public class DocService {
 
     public void save(DocSaveReq req) {
         Doc doc=CopyUtil.copy(req, Doc.class);
+        Content content=CopyUtil.copy(req, Content.class);
         if (req.getId() == null) {
             // 新增
             doc.setId(snowFlake.nextId());
             docMapper.insert(doc);
+            content.setId(doc.getId());
+            contentMapper.insert(content);
         } else {
             // 更新
             docMapper.updateByPrimaryKeySelective(doc);
+            contentMapper.updateByPrimaryKeyWithBLOBs(content);//大字段更新，BLOBS代表富文本段
         }
     }
 
