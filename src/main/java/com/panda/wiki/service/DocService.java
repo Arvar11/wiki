@@ -9,6 +9,7 @@ import com.panda.wiki.exception.BusinessException;
 import com.panda.wiki.exception.BusinessExceptionCode;
 import com.panda.wiki.mapper.ContentMapper;
 import com.panda.wiki.mapper.DocMapper;
+import com.panda.wiki.mapper.DocMapperCust;
 import com.panda.wiki.req.DocQueryReq;
 import com.panda.wiki.req.DocSaveReq;
 import com.panda.wiki.resp.DocResp;
@@ -34,6 +35,9 @@ public class DocService {
 
     @Autowired
     private ContentMapper contentMapper;
+
+    @Autowired
+    private DocMapperCust docMapperCust;
 
     public PageResp<DocResp> list(DocQueryReq req) {
 // 创建一个电子书查询条件对象（用于构建SQL查询条件）
@@ -120,6 +124,8 @@ public class DocService {
 
     public String findContent(Long id) {
         Content content= contentMapper.selectByPrimaryKey(id);
+        //查内容就代表了一次点击
+        docMapperCust.increaseViewCount(id);
         if(content==null){
             throw new BusinessException(BusinessExceptionCode.ID_NOT_EXIST);
         }
