@@ -5,6 +5,8 @@ import com.github.pagehelper.PageInfo;
 import com.panda.wiki.domain.Content;
 import com.panda.wiki.domain.Doc;
 import com.panda.wiki.domain.DocExample;
+import com.panda.wiki.exception.BusinessException;
+import com.panda.wiki.exception.BusinessExceptionCode;
 import com.panda.wiki.mapper.ContentMapper;
 import com.panda.wiki.mapper.DocMapper;
 import com.panda.wiki.req.DocQueryReq;
@@ -114,5 +116,13 @@ public class DocService {
         DocExample.Criteria criteria = docExample.createCriteria();
         criteria.andIdIn(ids);
         docMapper.deleteByExample(docExample);
+    }
+
+    public String findContent(Long id) {
+        Content content= contentMapper.selectByPrimaryKey(id);
+        if(content==null){
+            throw new BusinessException(BusinessExceptionCode.ID_NOT_EXIST);
+        }
+        return content.getContent();
     }
 }

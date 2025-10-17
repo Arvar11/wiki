@@ -50,3 +50,9 @@ token:237208252276936704
 DELETE http://localhost:8080/doc/delete/237165055723048960
 Content-Type: application/json
 token:237208252276936704
+
+###获取文本
+GET http://localhost:8080/doc/find-content/7
+Accept: application/json
+token:237441533530476544
+###
