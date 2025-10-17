@@ -55,4 +55,7 @@ token:237208252276936704
 GET http://localhost:8080/doc/find-content/237487582609543168
 Accept: application/json
 token:237487356175847424
-###
+###增加点赞数
+POST http://localhost:8080/doc/vote/237487403688923136
+Accept: application/json
+token:237487356175847424
