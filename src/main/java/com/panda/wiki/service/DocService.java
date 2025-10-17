@@ -77,9 +77,10 @@ public class DocService {
         return  pageResp;
     }
 
-    public List<DocResp> all() {
+    public List<DocResp> all(long ebookId) {
          // 创建一个电子书查询条件对象（用于构建SQL查询条件）
         DocExample docExample = new DocExample();
+        docExample.createCriteria().andEbookIdEqualTo(ebookId);
         docExample.setOrderByClause("sort asc");
         List<Doc> doclist = docMapper.selectByExample(docExample);
 

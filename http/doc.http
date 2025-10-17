@@ -9,8 +9,8 @@ token:237160053545766912
 GET http://localhost:8080/doc/list
 token:237160053545766912
 ###
-GET http://localhost:8080/doc/all
-
+GET http://localhost:8080/doc/all/1
+token:237406617090527232
 ### 更新
 POST http://localhost:8080/doc/save
 Content-Type: application/json
