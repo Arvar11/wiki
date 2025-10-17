@@ -28,12 +28,12 @@ token:237387506046341120
 ###保存
 POST http://localhost:8080/doc/save
 Content-Type: application/json
-token:237387506046341120
+token:237487356175847424
 
 {
 "ebookId": 1,
 "parent": 0,
-"name": "文档7",
+"name": "文档8",
   "content": "报文段 是TCP协议的工作单元，它：封装数据：将应用数据加上TCP控制信息。分块传输：将大数据流切割成适合网络传输的块提供可靠性：通过序列号、确认、重传机制实现流量控制：通过窗口大小管理保证顺序：接收方按序列号重组数据简单来说：报文段就是TCP为了在不可靠的IP网络上实现可靠传输而创造的智能数据包。它让TCP能够像寄挂号信一样，确保每个数据块都能可靠、有序地到达目的地。"
 
 }
@@ -52,7 +52,7 @@ Content-Type: application/json
 token:237208252276936704
 
 ###获取文本
-GET http://localhost:8080/doc/find-content/7
+GET http://localhost:8080/doc/find-content/237487582609543168
 Accept: application/json
-token:237441533530476544
+token:237487356175847424
 ###
