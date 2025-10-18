@@ -1,0 +1,13 @@
+### 测试WebSocket基本连接
+WEBSOCKET ws://localhost:8080/ws/test-token-123
+Content-Type: application/json // 可选，根据你的需要设置
+
+===
+
+{
+  "message": "Hello, WebSocket Server!",
+  "type": "greeting"
+}
+### 测试群发
+### 用户2连接
+WEBSOCKET ws://localhost:8080/ws/user-002

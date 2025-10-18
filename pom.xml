@@ -92,6 +92,12 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
+<!--        WebSocket实现点赞通知-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

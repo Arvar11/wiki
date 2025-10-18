@@ -60,5 +60,5 @@ POST http://localhost:8080/doc/vote/237487403688923136
 Accept: application/json
 ### 同一ip增加点赞数
 POST http://localhost:8080/doc/vote/237487403688923136
-x-forwarded-for:192.168.1.100
-token:237572222829596672
+x-forwarded-for:192.168.1.101
+token:237935214955991040
