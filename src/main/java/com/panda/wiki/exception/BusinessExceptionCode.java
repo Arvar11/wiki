@@ -4,7 +4,7 @@ public enum BusinessExceptionCode {
 
     USER_LOGIN_NAME_EXIST("登录名已存在"),
     LOGIN_USER_ERROR("登录名不存在或密码错误"),
-    ID_NOT_EXIST("id不存在");
+    ID_NOT_EXIST("id不存在"), VOTE_REPEAT("不能重复投票");
     // 可以继续添加其他异常码
     // EXAMPLE_ERROR("示例错误");
 

@@ -15,6 +15,8 @@ import com.panda.wiki.req.DocSaveReq;
 import com.panda.wiki.resp.DocResp;
 import com.panda.wiki.resp.PageResp;
 import com.panda.wiki.util.CopyUtil;
+import com.panda.wiki.util.RedisUtil;
+import com.panda.wiki.util.RequestContext;
 import com.panda.wiki.util.SnowFlake;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,9 @@ public class DocService {
 
     @Autowired
     private DocMapperCust docMapperCust;
+
+    @Resource
+    private RedisUtil redisUtil;
 
     public PageResp<DocResp> list(DocQueryReq req) {
 // 创建一个电子书查询条件对象（用于构建SQL查询条件）
@@ -135,6 +140,18 @@ public class DocService {
     }
 
     public void vote(Long id){
-        docMapperCust.increaseVoteCount(id);
+        //docMapperCust.increaseVoteCount(id);
+        // 使用远程IP + 文档ID作为唯一键，确保24小时内不能重复投票
+        String ip = RequestContext.getRemoteAddr();
+        String redisKey = "DOC_VOTE_" + id + "__" + ip;
+
+        // 检查是否已投票：true=未投票，false=已投过票
+        if (redisUtil.validateRepeat(redisKey, 3600 * 24)) {
+            // 未投过票，执行投票操作
+            docMapperCust.increaseVoteCount(id);
+        } else {
+            // 已投过票，抛出重复投票异常
+            throw new BusinessException(BusinessExceptionCode.VOTE_REPEAT);
+        }
     }
 }

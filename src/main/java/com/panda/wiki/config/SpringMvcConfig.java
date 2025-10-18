@@ -32,6 +32,7 @@ public class SpringMvcConfig implements WebMvcConfigurer { // 修正：WebMvcCon
                         "/category/all",
                         "/ebook/list",
                         "/doc/all/**",
+                        "doc/vote/**",
                         "/doc/find-content/**",
                         "/redis/**",
                         "/error"
