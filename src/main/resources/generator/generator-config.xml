@@ -51,7 +51,7 @@
 <!--        <table tableName="category" domainObjectName="Category"/>-->
 <!--        <table tableName="user" />-->
 <!--        <table tableName="doc" />-->
-        <table tableName="content" />
-
+<!--        <table tableName="content" />-->
+        <table tableName="ebook_snapshot" />
     </context>
 </generatorConfiguration>
