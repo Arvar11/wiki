@@ -21,6 +21,7 @@ import com.panda.wiki.util.RequestContext;
 import com.panda.wiki.util.SnowFlake;
 import com.panda.wiki.websocket.WebSocketServer;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,6 +54,9 @@ public class DocService {
 
     @Resource
     private WebSocketService webSocketService;
+
+    @Resource
+    private RocketMQTemplate rocketMQTemplate;
 
     public PageResp<DocResp> list(DocQueryReq req) {
 // 创建一个电子书查询条件对象（用于构建SQL查询条件）
@@ -168,7 +172,8 @@ public class DocService {
         //推送消息
         log.info("同步方法执行，线程: {}", Thread.currentThread().getName());
         Doc docDB=docMapper.selectByPrimaryKey(id);
-        webSocketService.sendInfo(docDB.getName()+"被点赞了");
+        //webSocketService.sendInfo(docDB.getName()+"被点赞了");
+        rocketMQTemplate.convertAndSend("VOTE_TOPIC",docDB.getName()+"被点赞了");
     }
 
     public void updateEbookInfo(){

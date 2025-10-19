@@ -98,6 +98,14 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
+<!--        rocketmq-->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+        
+
     </dependencies>
 
     <build>
