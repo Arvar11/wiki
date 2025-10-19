@@ -48,8 +48,10 @@ public class DocService {
 
     @Resource
     private WebSocketConfig webSocketConfig;
-    @Autowired
-    private WebSocketServer webSocketServer;
+
+
+    @Resource
+    private WebSocketService webSocketService;
 
     public PageResp<DocResp> list(DocQueryReq req) {
 // 创建一个电子书查询条件对象（用于构建SQL查询条件）
@@ -162,8 +164,9 @@ public class DocService {
         }
 
         //推送消息
+        log.info("同步方法执行，线程: {}", Thread.currentThread().getName());
         Doc docDB=docMapper.selectByPrimaryKey(id);
-        webSocketServer.sendInfo(docDB.getName()+"被点赞了");
+        webSocketService.sendInfo(docDB.getName()+"被点赞了");
     }
 
     public void updateEbookInfo(){
