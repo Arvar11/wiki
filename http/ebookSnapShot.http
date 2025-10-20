@@ -1,0 +1,4 @@
+GET http://localhost:8080/ebook-snapshot/get-statistic
+Accept: application/json
+
+###
