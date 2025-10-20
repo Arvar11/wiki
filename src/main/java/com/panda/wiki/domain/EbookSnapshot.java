@@ -7,7 +7,7 @@ public class EbookSnapshot {
 
     private Long ebookId;
 
-    private Date snapshotDate;
+    private Date date;
 
     private Integer viewCount;
 
@@ -16,10 +16,6 @@ public class EbookSnapshot {
     private Integer viewIncrease;
 
     private Integer voteIncrease;
-
-    private Date createdTime;
-
-    private Date updatedTime;
 
     public Long getId() {
         return id;
@@ -37,12 +33,12 @@ public class EbookSnapshot {
         this.ebookId = ebookId;
     }
 
-    public Date getSnapshotDate() {
-        return snapshotDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setSnapshotDate(Date snapshotDate) {
-        this.snapshotDate = snapshotDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Integer getViewCount() {
@@ -77,22 +73,6 @@ public class EbookSnapshot {
         this.voteIncrease = voteIncrease;
     }
 
-    public Date getCreatedTime() {
-        return createdTime;
-    }
-
-    public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
-    }
-
-    public Date getUpdatedTime() {
-        return updatedTime;
-    }
-
-    public void setUpdatedTime(Date updatedTime) {
-        this.updatedTime = updatedTime;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -101,13 +81,11 @@ public class EbookSnapshot {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", ebookId=").append(ebookId);
-        sb.append(", snapshotDate=").append(snapshotDate);
+        sb.append(", date=").append(date);
         sb.append(", viewCount=").append(viewCount);
         sb.append(", voteCount=").append(voteCount);
         sb.append(", viewIncrease=").append(viewIncrease);
         sb.append(", voteIncrease=").append(voteIncrease);
-        sb.append(", createdTime=").append(createdTime);
-        sb.append(", updatedTime=").append(updatedTime);
         sb.append("]");
         return sb.toString();
     }

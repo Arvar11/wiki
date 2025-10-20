@@ -4,13 +4,11 @@
   <resultMap id="BaseResultMap" type="com.panda.wiki.domain.EbookSnapshot">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="ebook_id" jdbcType="BIGINT" property="ebookId" />
-    <result column="snapshot_date" jdbcType="DATE" property="snapshotDate" />
+    <result column="date" jdbcType="DATE" property="date" />
     <result column="view_count" jdbcType="INTEGER" property="viewCount" />
     <result column="vote_count" jdbcType="INTEGER" property="voteCount" />
     <result column="view_increase" jdbcType="INTEGER" property="viewIncrease" />
     <result column="vote_increase" jdbcType="INTEGER" property="voteIncrease" />
-    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
-    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,8 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, ebook_id, snapshot_date, view_count, vote_count, view_increase, vote_increase, 
-    created_time, updated_time
+    id, ebook_id, `date`, view_count, vote_count, view_increase, vote_increase
   </sql>
   <select id="selectByExample" parameterType="com.panda.wiki.domain.EbookSnapshotExample" resultMap="BaseResultMap">
     select
@@ -105,14 +102,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.panda.wiki.domain.EbookSnapshot">
-    insert into ebook_snapshot (id, ebook_id, snapshot_date, 
+    insert into ebook_snapshot (id, ebook_id, `date`, 
       view_count, vote_count, view_increase, 
-      vote_increase, created_time, updated_time
-      )
-    values (#{id,jdbcType=BIGINT}, #{ebookId,jdbcType=BIGINT}, #{snapshotDate,jdbcType=DATE}, 
+      vote_increase)
+    values (#{id,jdbcType=BIGINT}, #{ebookId,jdbcType=BIGINT}, #{date,jdbcType=DATE}, 
       #{viewCount,jdbcType=INTEGER}, #{voteCount,jdbcType=INTEGER}, #{viewIncrease,jdbcType=INTEGER}, 
-      #{voteIncrease,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}
-      )
+      #{voteIncrease,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.panda.wiki.domain.EbookSnapshot">
     insert into ebook_snapshot
@@ -123,8 +118,8 @@
       <if test="ebookId != null">
         ebook_id,
       </if>
-      <if test="snapshotDate != null">
-        snapshot_date,
+      <if test="date != null">
+        `date`,
       </if>
       <if test="viewCount != null">
         view_count,
@@ -138,12 +133,6 @@
       <if test="voteIncrease != null">
         vote_increase,
       </if>
-      <if test="createdTime != null">
-        created_time,
-      </if>
-      <if test="updatedTime != null">
-        updated_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -152,8 +141,8 @@
       <if test="ebookId != null">
         #{ebookId,jdbcType=BIGINT},
       </if>
-      <if test="snapshotDate != null">
-        #{snapshotDate,jdbcType=DATE},
+      <if test="date != null">
+        #{date,jdbcType=DATE},
       </if>
       <if test="viewCount != null">
         #{viewCount,jdbcType=INTEGER},
@@ -166,12 +155,6 @@
       </if>
       <if test="voteIncrease != null">
         #{voteIncrease,jdbcType=INTEGER},
-      </if>
-      <if test="createdTime != null">
-        #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedTime != null">
-        #{updatedTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -190,8 +173,8 @@
       <if test="record.ebookId != null">
         ebook_id = #{record.ebookId,jdbcType=BIGINT},
       </if>
-      <if test="record.snapshotDate != null">
-        snapshot_date = #{record.snapshotDate,jdbcType=DATE},
+      <if test="record.date != null">
+        `date` = #{record.date,jdbcType=DATE},
       </if>
       <if test="record.viewCount != null">
         view_count = #{record.viewCount,jdbcType=INTEGER},
@@ -205,12 +188,6 @@
       <if test="record.voteIncrease != null">
         vote_increase = #{record.voteIncrease,jdbcType=INTEGER},
       </if>
-      <if test="record.createdTime != null">
-        created_time = #{record.createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.updatedTime != null">
-        updated_time = #{record.updatedTime,jdbcType=TIMESTAMP},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -220,13 +197,11 @@
     update ebook_snapshot
     set id = #{record.id,jdbcType=BIGINT},
       ebook_id = #{record.ebookId,jdbcType=BIGINT},
-      snapshot_date = #{record.snapshotDate,jdbcType=DATE},
+      `date` = #{record.date,jdbcType=DATE},
       view_count = #{record.viewCount,jdbcType=INTEGER},
       vote_count = #{record.voteCount,jdbcType=INTEGER},
       view_increase = #{record.viewIncrease,jdbcType=INTEGER},
-      vote_increase = #{record.voteIncrease,jdbcType=INTEGER},
-      created_time = #{record.createdTime,jdbcType=TIMESTAMP},
-      updated_time = #{record.updatedTime,jdbcType=TIMESTAMP}
+      vote_increase = #{record.voteIncrease,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -237,8 +212,8 @@
       <if test="ebookId != null">
         ebook_id = #{ebookId,jdbcType=BIGINT},
       </if>
-      <if test="snapshotDate != null">
-        snapshot_date = #{snapshotDate,jdbcType=DATE},
+      <if test="date != null">
+        `date` = #{date,jdbcType=DATE},
       </if>
       <if test="viewCount != null">
         view_count = #{viewCount,jdbcType=INTEGER},
@@ -252,25 +227,17 @@
       <if test="voteIncrease != null">
         vote_increase = #{voteIncrease,jdbcType=INTEGER},
       </if>
-      <if test="createdTime != null">
-        created_time = #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedTime != null">
-        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
-      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.panda.wiki.domain.EbookSnapshot">
     update ebook_snapshot
     set ebook_id = #{ebookId,jdbcType=BIGINT},
-      snapshot_date = #{snapshotDate,jdbcType=DATE},
+      `date` = #{date,jdbcType=DATE},
       view_count = #{viewCount,jdbcType=INTEGER},
       vote_count = #{voteCount,jdbcType=INTEGER},
       view_increase = #{viewIncrease,jdbcType=INTEGER},
-      vote_increase = #{voteIncrease,jdbcType=INTEGER},
-      created_time = #{createdTime,jdbcType=TIMESTAMP},
-      updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+      vote_increase = #{voteIncrease,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

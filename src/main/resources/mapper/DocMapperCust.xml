@@ -30,4 +30,5 @@
             t1.vote_count = t2.vote_count
         WHERE t1.id = t2.ebook_id;
     </update>
+
 </mapper>

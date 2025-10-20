@@ -252,63 +252,63 @@ public class EbookSnapshotExample {
             return (Criteria) this;
         }
 
-        public Criteria andSnapshotDateIsNull() {
-            addCriterion("snapshot_date is null");
+        public Criteria andDateIsNull() {
+            addCriterion("`date` is null");
             return (Criteria) this;
         }
 
-        public Criteria andSnapshotDateIsNotNull() {
-            addCriterion("snapshot_date is not null");
+        public Criteria andDateIsNotNull() {
+            addCriterion("`date` is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSnapshotDateEqualTo(Date value) {
-            addCriterionForJDBCDate("snapshot_date =", value, "snapshotDate");
+        public Criteria andDateEqualTo(Date value) {
+            addCriterionForJDBCDate("`date` =", value, "date");
             return (Criteria) this;
         }
 
-        public Criteria andSnapshotDateNotEqualTo(Date value) {
-            addCriterionForJDBCDate("snapshot_date <>", value, "snapshotDate");
+        public Criteria andDateNotEqualTo(Date value) {
+            addCriterionForJDBCDate("`date` <>", value, "date");
             return (Criteria) this;
         }
 
-        public Criteria andSnapshotDateGreaterThan(Date value) {
-            addCriterionForJDBCDate("snapshot_date >", value, "snapshotDate");
+        public Criteria andDateGreaterThan(Date value) {
+            addCriterionForJDBCDate("`date` >", value, "date");
             return (Criteria) this;
         }
 
-        public Criteria andSnapshotDateGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("snapshot_date >=", value, "snapshotDate");
+        public Criteria andDateGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("`date` >=", value, "date");
             return (Criteria) this;
         }
 
-        public Criteria andSnapshotDateLessThan(Date value) {
-            addCriterionForJDBCDate("snapshot_date <", value, "snapshotDate");
+        public Criteria andDateLessThan(Date value) {
+            addCriterionForJDBCDate("`date` <", value, "date");
             return (Criteria) this;
         }
 
-        public Criteria andSnapshotDateLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("snapshot_date <=", value, "snapshotDate");
+        public Criteria andDateLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("`date` <=", value, "date");
             return (Criteria) this;
         }
 
-        public Criteria andSnapshotDateIn(List<Date> values) {
-            addCriterionForJDBCDate("snapshot_date in", values, "snapshotDate");
+        public Criteria andDateIn(List<Date> values) {
+            addCriterionForJDBCDate("`date` in", values, "date");
             return (Criteria) this;
         }
 
-        public Criteria andSnapshotDateNotIn(List<Date> values) {
-            addCriterionForJDBCDate("snapshot_date not in", values, "snapshotDate");
+        public Criteria andDateNotIn(List<Date> values) {
+            addCriterionForJDBCDate("`date` not in", values, "date");
             return (Criteria) this;
         }
 
-        public Criteria andSnapshotDateBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("snapshot_date between", value1, value2, "snapshotDate");
+        public Criteria andDateBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("`date` between", value1, value2, "date");
             return (Criteria) this;
         }
 
-        public Criteria andSnapshotDateNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("snapshot_date not between", value1, value2, "snapshotDate");
+        public Criteria andDateNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("`date` not between", value1, value2, "date");
             return (Criteria) this;
         }
 
@@ -549,126 +549,6 @@ public class EbookSnapshotExample {
 
         public Criteria andVoteIncreaseNotBetween(Integer value1, Integer value2) {
             addCriterion("vote_increase not between", value1, value2, "voteIncrease");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedTimeIsNull() {
-            addCriterion("created_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedTimeIsNotNull() {
-            addCriterion("created_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedTimeEqualTo(Date value) {
-            addCriterion("created_time =", value, "createdTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedTimeNotEqualTo(Date value) {
-            addCriterion("created_time <>", value, "createdTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedTimeGreaterThan(Date value) {
-            addCriterion("created_time >", value, "createdTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("created_time >=", value, "createdTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedTimeLessThan(Date value) {
-            addCriterion("created_time <", value, "createdTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedTimeLessThanOrEqualTo(Date value) {
-            addCriterion("created_time <=", value, "createdTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedTimeIn(List<Date> values) {
-            addCriterion("created_time in", values, "createdTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedTimeNotIn(List<Date> values) {
-            addCriterion("created_time not in", values, "createdTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedTimeBetween(Date value1, Date value2) {
-            addCriterion("created_time between", value1, value2, "createdTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedTimeNotBetween(Date value1, Date value2) {
-            addCriterion("created_time not between", value1, value2, "createdTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedTimeIsNull() {
-            addCriterion("updated_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedTimeIsNotNull() {
-            addCriterion("updated_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedTimeEqualTo(Date value) {
-            addCriterion("updated_time =", value, "updatedTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedTimeNotEqualTo(Date value) {
-            addCriterion("updated_time <>", value, "updatedTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedTimeGreaterThan(Date value) {
-            addCriterion("updated_time >", value, "updatedTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("updated_time >=", value, "updatedTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedTimeLessThan(Date value) {
-            addCriterion("updated_time <", value, "updatedTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedTimeLessThanOrEqualTo(Date value) {
-            addCriterion("updated_time <=", value, "updatedTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedTimeIn(List<Date> values) {
-            addCriterion("updated_time in", values, "updatedTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedTimeNotIn(List<Date> values) {
-            addCriterion("updated_time not in", values, "updatedTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedTimeBetween(Date value1, Date value2) {
-            addCriterion("updated_time between", value1, value2, "updatedTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdatedTimeNotBetween(Date value1, Date value2) {
-            addCriterion("updated_time not between", value1, value2, "updatedTime");
             return (Criteria) this;
         }
     }

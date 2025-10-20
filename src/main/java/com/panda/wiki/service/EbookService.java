@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.panda.wiki.domain.Ebook;
 import com.panda.wiki.domain.EbookExample;
 import com.panda.wiki.mapper.EbookMapper;
+import com.panda.wiki.mapper.EbookMapperCust;
 import com.panda.wiki.req.EbookQueryReq;
 import com.panda.wiki.req.EbookSaveReq;
 import com.panda.wiki.resp.EbookResp;
@@ -28,6 +29,8 @@ public class EbookService {
 
     @Autowired
     private SnowFlake snowFlake;  // 注入雪花算法
+    @Autowired
+    private EbookMapperCust ebookMapperCust;
 
     public PageResp<EbookResp> list(EbookQueryReq req) {
         log.info(req.toString());
@@ -94,4 +97,7 @@ public class EbookService {
         ebookMapper.deleteByPrimaryKey(id);
     }
 
+    public void genSnapShot() {
+        ebookMapperCust.genSnapShot();
+    }
 }
