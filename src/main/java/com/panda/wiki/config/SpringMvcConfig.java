@@ -36,7 +36,7 @@ public class SpringMvcConfig implements WebMvcConfigurer { // 修正：WebMvcCon
                         "/doc/find-content/**",
                         "/redis/**",
                         "/error",
-                        "/ebook-snapshot/get-statistic"
+                        "/ebook-snapshot/**"
                 )
                 .order(2);// 排除登录页面
     }

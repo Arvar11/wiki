@@ -50,4 +50,22 @@
                 t1.`date` ASC;
 
     </select>
+    <select id="get30Statistic" resultType="com.panda.wiki.resp.StatisticResp">
+        <!-- 获取统计数据：总阅读数、总点赞数、今日阅读数、今日点赞数、今日预计阅读数、今日预计阅读增长 -->
+        SELECT
+        t1.`date` as `date`,
+        SUM(t1.view_count) as viewCount,
+        SUM(t1.vote_count) as voteCount,
+        SUM(t1.view_increase) as viewIncrease,
+        SUM(t1.vote_increase) as voteIncrease
+        FROM
+        ebook_snapshot t1
+        WHERE
+        t1.`date` >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+        GROUP BY
+        t1.`date`
+        ORDER BY
+        t1.`date` ASC;
+
+    </select>
 </mapper>
